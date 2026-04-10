@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Voice transcription app — speak into your microphone and get instant text transcription.">
+    <title>Voxa — Voice Transcription</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="bg-glow bg-glow-1"></div>
+    <div class="bg-glow bg-glow-2"></div>
+    <div class="bg-glow bg-glow-3"></div>
+
+    <main class="container">
+        <header class="header">
+            <div class="logo">
+                <svg class="logo-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="32" height="32" rx="8" fill="url(#logoGrad)"/>
+                    <path d="M16 7C14.067 7 12.5 8.567 12.5 10.5V16.5C12.5 18.433 14.067 20 16 20C17.933 20 19.5 18.433 19.5 16.5V10.5C19.5 8.567 17.933 7 16 7Z" fill="white" fill-opacity="0.9"/>
+                    <path d="M10 15V16.5C10 19.814 12.686 22.5 16 22.5C19.314 22.5 22 19.814 22 16.5V15" stroke="white" stroke-opacity="0.9" stroke-width="1.5" stroke-linecap="round"/>
+                    <line x1="16" y1="22.5" x2="16" y2="25" stroke="white" stroke-opacity="0.9" stroke-width="1.5" stroke-linecap="round"/>
+                    <line x1="13" y1="25" x2="19" y2="25" stroke="white" stroke-opacity="0.9" stroke-width="1.5" stroke-linecap="round"/>
+                    <defs>
+                        <linearGradient id="logoGrad" x1="0" y1="0" x2="32" y2="32">
+                            <stop stop-color="#6366f1"/>
+                            <stop offset="1" stop-color="#a855f7"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+                <span class="logo-text">Voxa</span>
+            </div>
+            <p class="tagline">Speak. Transcribe. Edit.</p>
+        </header>
+
+        <section class="recorder-card" id="recorder-card">
+            <!-- Mic Button -->
+            <div class="mic-wrapper" id="mic-wrapper">
+                <div class="mic-ring mic-ring-1"></div>
+                <div class="mic-ring mic-ring-2"></div>
+                <div class="mic-ring mic-ring-3"></div>
+                <button class="mic-btn" id="mic-btn" aria-label="Start recording">
+                    <svg class="mic-icon" id="mic-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C10.3431 2 9 3.34315 9 5V12C9 13.6569 10.3431 15 12 15C13.6569 15 15 13.6569 15 12V5C15 3.34315 13.6569 2 12 2Z" fill="currentColor"/>
+                        <path d="M7 10V12C7 14.7614 9.23858 17 12 17C14.7614 17 17 14.7614 17 12V10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        <line x1="12" y1="17" x2="12" y2="20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        <line x1="9" y1="20" x2="15" y2="20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                    <!-- Stop icon (hidden by default) -->
+                    <svg class="stop-icon hidden" id="stop-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="6" y="6" width="12" height="12" rx="2" fill="currentColor"/>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Status -->
+            <div class="status" id="status">
+                <span class="status-dot" id="status-dot"></span>
+                <span class="status-text" id="status-text">Ready to record</span>
+            </div>
+
+            <!-- Timer -->
+            <div class="timer hidden" id="timer">0:00</div>
+
+            <!-- Waveform visualizer -->
+            <div class="waveform hidden" id="waveform">
+                <canvas id="waveform-canvas" width="300" height="48"></canvas>
+            </div>
+        </section>
+
+        <!-- Transcript Output -->
+        <section class="transcript-card hidden" id="transcript-card">
+            <div class="transcript-header">
+                <h2 class="transcript-title">Transcript</h2>
+                <div class="transcript-actions">
+                    <button class="action-btn" id="copy-btn" aria-label="Copy transcript" title="Copy to clipboard">
+                        <svg viewBox="0 0 20 20" fill="currentColor" width="18" height="18">
+                            <path d="M7 3.5A1.5 1.5 0 018.5 2h3.879a1.5 1.5 0 011.06.44l3.122 3.12a1.5 1.5 0 01.44 1.061V13.5a1.5 1.5 0 01-1.5 1.5H8.5A1.5 1.5 0 017 13.5V3.5z"/>
+                            <path d="M4.5 6A1.5 1.5 0 003 7.5v9A1.5 1.5 0 004.5 18h7a1.5 1.5 0 001.5-1.5v-.071A1.5 1.5 0 0014.5 16H8.5A2.5 2.5 0 016 13.5V7.5A1.5 1.5 0 004.5 6z"/>
+                        </svg>
+                        <span>Copy</span>
+                    </button>
+                    <button class="action-btn" id="clear-btn" aria-label="Clear transcript" title="Clear transcript">
+                        <svg viewBox="0 0 20 20" fill="currentColor" width="18" height="18">
+                            <path fill-rule="evenodd" d="M8.75 1A2.75 2.75 0 006 3.75v.443c-.795.077-1.584.176-2.365.298a.75.75 0 10.23 1.482l.149-.022.841 10.518A2.75 2.75 0 007.596 19h4.807a2.75 2.75 0 002.742-2.53l.841-10.52.149.023a.75.75 0 00.23-1.482A41.03 41.03 0 0014 4.193V3.75A2.75 2.75 0 0011.25 1h-2.5zM10 4c.84 0 1.673.025 2.5.075V3.75c0-.69-.56-1.25-1.25-1.25h-2.5c-.69 0-1.25.56-1.25 1.25v.325C8.327 4.025 9.16 4 10 4zM8.58 7.72a.75.75 0 00-1.5.06l.3 7.5a.75.75 0 101.5-.06l-.3-7.5zm4.34.06a.75.75 0 10-1.5-.06l-.3 7.5a.75.75 0 101.5.06l.3-7.5z" clip-rule="evenodd"/>
+                        </svg>
+                        <span>Clear</span>
+                    </button>
+                </div>
+            </div>
+            <textarea
+                class="transcript-text"
+                id="transcript-text"
+                placeholder="Your transcription will appear here..."
+                spellcheck="true"
+            ></textarea>
+            <div class="transcript-footer">
+                <span class="word-count" id="word-count">0 words</span>
+                <span class="char-count" id="char-count">0 characters</span>
+            </div>
+        </section>
+
+        <!-- Toast notification -->
+        <div class="toast hidden" id="toast">
+            <span id="toast-text">Copied to clipboard!</span>
+        </div>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>
