@@ -16,6 +16,7 @@ const transcriptText = document.getElementById('transcript-text');
 const wordCount = document.getElementById('word-count');
 const charCount = document.getElementById('char-count');
 const copyBtn = document.getElementById('copy-btn');
+const exportBtn = document.getElementById('export-btn');
 const clearBtn = document.getElementById('clear-btn');
 const toast = document.getElementById('toast');
 const toastText = document.getElementById('toast-text');
@@ -120,45 +121,38 @@ function getSupportedMimeType() {
 // ============================================
 // Handle Recording Complete
 // ============================================
-function handleRecordingComplete(audioBlob) {
+async function handleRecordingComplete(audioBlob) {
     setStatus('processing', 'Transcribing audio...');
 
-    // TODO: Replace this with actual API call
-    // For now, simulate a transcription response
-    simulateTranscription(audioBlob);
-}
+    try {
+        // Determine a suitable file extension from the mime type
+        const mimeType = audioBlob.type || 'audio/webm';
+        const ext = mimeType.includes('ogg') ? 'ogg'
+                  : mimeType.includes('mp4') ? 'mp4'
+                  : 'webm';
 
-/**
- * Placeholder: simulates an API response.
- * Replace this function body with a real fetch() to your
- * speech-to-text endpoint (e.g. OpenAI Whisper, Deepgram, etc.)
- *
- * Example real implementation:
- *
- *   async function transcribeAudio(audioBlob) {
- *       const formData = new FormData();
- *       formData.append('file', audioBlob, 'recording.webm');
- *       formData.append('model', 'whisper-1');
- *
- *       const res = await fetch('https://api.openai.com/v1/audio/transcriptions', {
- *           method: 'POST',
- *           headers: { 'Authorization': 'Bearer YOUR_API_KEY' },
- *           body: formData,
- *       });
- *
- *       const data = await res.json();
- *       showTranscript(data.text);
- *   }
- */
-function simulateTranscription(audioBlob) {
-    const durationSec = (Date.now() - recordingStartTime) / 1000;
-    const roundedDuration = Math.round(durationSec * 10) / 10;
+        const formData = new FormData();
+        formData.append('file', audioBlob, `recording.${ext}`);
 
-    setTimeout(() => {
-        const sampleText = `This is a placeholder transcription. Your ${roundedDuration}s audio recording (${formatBytes(audioBlob.size)}) was captured successfully.\n\nConnect a speech-to-text API (like OpenAI Whisper) to see real transcriptions here.`;
-        showTranscript(sampleText);
+        const response = await fetch('http://127.0.0.1:5000/api/transcribe', {
+            method: 'POST',
+            body: formData,
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json().catch(() => ({}));
+            throw new Error(errorData.error || `Server error (${response.status})`);
+        }
+
+        const data = await response.json();
+        showTranscript(data.text);
         setStatus('done', 'Transcription complete');
-    }, 1500);
+
+    } catch (error) {
+        console.error('Transcription failed:', error);
+        setStatus('error', error.message || 'Transcription failed');
+        showToast('Transcription failed — check console for details.');
+    }
 }
 
 // ============================================
@@ -199,10 +193,24 @@ copyBtn.addEventListener('click', async () => {
     }
 });
 
+exportBtn.addEventListener('click', () => {
+    const text = transcriptText.value;
+    if (!text.trim()) return;
+
+    const blob = new Blob([text], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `transcript-${new Date().toISOString().slice(0, 19).replace(/[T:]/g, '-')}.txt`;
+    a.click();
+    URL.revokeObjectURL(url);
+    showToast('Transcript exported!');
+});
+
 clearBtn.addEventListener('click', () => {
     transcriptText.value = '';
     updateCounts();
-    transcriptCard.classList.add('hidden');
+    // transcriptCard.classList.add('hidden');
     setStatus('ready', 'Ready to record');
 });
 

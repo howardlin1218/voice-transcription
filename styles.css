@@ -64,6 +64,11 @@ body {
     min-height: 100vh;
     overflow-x: hidden;
     position: relative;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
 }
 
 /* ============================================
@@ -119,11 +124,12 @@ body {
    LAYOUT
    ============================================ */
 .container {
-    max-width: 640px;
-    margin: 0 auto;
+    /* max-width: 640px; */
+    /* margin: 0 auto; */
     padding: 48px 24px 80px;
     position: relative;
     z-index: 1;
+    width: 50%;
 }
 
 /* ============================================

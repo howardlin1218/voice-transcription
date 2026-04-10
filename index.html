@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Voice transcription app — speak into your microphone and get instant text transcription.">
-    <title>Voxa — Voice Transcription</title>
+    <title>Voice Transcription</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -31,7 +31,7 @@
                         </linearGradient>
                     </defs>
                 </svg>
-                <span class="logo-text">Voxa</span>
+                <span class="logo-text">Voice Transcription</span>
             </div>
             <p class="tagline">Speak. Transcribe. Edit.</p>
         </header>
@@ -72,7 +72,7 @@
         </section>
 
         <!-- Transcript Output -->
-        <section class="transcript-card hidden" id="transcript-card">
+        <section class="transcript-card" id="transcript-card">
             <div class="transcript-header">
                 <h2 class="transcript-title">Transcript</h2>
                 <div class="transcript-actions">
@@ -82,6 +82,13 @@
                             <path d="M4.5 6A1.5 1.5 0 003 7.5v9A1.5 1.5 0 004.5 18h7a1.5 1.5 0 001.5-1.5v-.071A1.5 1.5 0 0014.5 16H8.5A2.5 2.5 0 016 13.5V7.5A1.5 1.5 0 004.5 6z"/>
                         </svg>
                         <span>Copy</span>
+                    </button>
+                    <button class="action-btn" id="export-btn" aria-label="Export transcript" title="Export as .txt">
+                        <svg viewBox="0 0 20 20" fill="currentColor" width="18" height="18">
+                            <path d="M10.75 2.75a.75.75 0 00-1.5 0v8.614L6.295 8.235a.75.75 0 10-1.09 1.03l4.25 4.5a.75.75 0 001.09 0l4.25-4.5a.75.75 0 00-1.09-1.03l-2.955 3.129V2.75z"/>
+                            <path d="M3.5 12.75a.75.75 0 00-1.5 0v2.5A2.75 2.75 0 004.75 18h10.5A2.75 2.75 0 0018 15.25v-2.5a.75.75 0 00-1.5 0v2.5c0 .69-.56 1.25-1.25 1.25H4.75c-.69 0-1.25-.56-1.25-1.25v-2.5z"/>
+                        </svg>
+                        <span>Export</span>
                     </button>
                     <button class="action-btn" id="clear-btn" aria-label="Clear transcript" title="Clear transcript">
                         <svg viewBox="0 0 20 20" fill="currentColor" width="18" height="18">
@@ -109,6 +116,6 @@
         </div>
     </main>
 
-    <script src="app.js"></script>
+    <script type="module" src="app.js"></script>
 </body>
 </html>
