@@ -134,7 +134,7 @@ async function handleRecordingComplete(audioBlob) {
         const formData = new FormData();
         formData.append('file', audioBlob, `recording.${ext}`);
 
-        const response = await fetch('http://127.0.0.1:5000/api/transcribe', {
+        const response = await fetch('/api/transcribe', {
             method: 'POST',
             body: formData,
         });
