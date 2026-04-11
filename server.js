@@ -16,7 +16,7 @@ if (HOST === "127.0.0.1") {
 app.use(express.json());
 
 // Serve frontend static files (index.html, app.js, styles.css, etc.)
-// app.use(express.static(__dirname));
+app.use(express.static(__dirname));
 
 // 2. Multer Configuration (In-Memory)
 const upload = multer({ 
