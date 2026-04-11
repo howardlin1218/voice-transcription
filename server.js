@@ -6,13 +6,17 @@ const cors = require('cors');
 
 const app = express();
 const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
+const PORT = process.env.PORT || 5000;
+const HOST = process.env.HOST || '0.0.0.0';
 
 // 1. Middleware
-app.use(cors()); // Essential if frontend/backend are on different ports
+if (HOST === "127.0.0.1") {
+  app.use(cors()); // Essential if frontend/backend are on different ports  app.use(cors()); // Essential if frontend/backend are on different ports
+}
 app.use(express.json());
 
 // Serve frontend static files (index.html, app.js, styles.css, etc.)
-app.use(express.static(__dirname));
+// app.use(express.static(__dirname));
 
 // 2. Multer Configuration (In-Memory)
 const upload = multer({ 
@@ -44,6 +48,4 @@ app.post('/api/transcribe', upload.single('file'), async (req, res) => {
   }
 });
 
-const PORT = process.env.PORT || 5000;
-const HOST = process.env.HOST || '0.0.0.0';
 app.listen(PORT, HOST, () => console.log(`Backend live on port ${PORT}`));

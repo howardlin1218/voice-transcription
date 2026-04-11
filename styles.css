@@ -1,37 +1,37 @@
 /* ============================================
-   DESIGN TOKENS
+   DESIGN TOKENS — PASTEL PALETTE
    ============================================ */
 :root {
-    --bg-base: #0a0a0f;
-    --bg-elevated: rgba(255, 255, 255, 0.04);
-    --bg-card: rgba(255, 255, 255, 0.06);
-    --bg-card-hover: rgba(255, 255, 255, 0.08);
+    --bg-base: #f5f0f8;
+    --bg-elevated: #ffffff;
+    --bg-card: #ffffff;
+    --bg-card-hover: #f0eaf5;
 
-    --border-subtle: rgba(255, 255, 255, 0.08);
-    --border-accent: rgba(99, 102, 241, 0.3);
+    --border-subtle: #e4dced;
+    --border-accent: #c4b5d4;
 
-    --text-primary: #f0f0f5;
-    --text-secondary: rgba(240, 240, 245, 0.6);
-    --text-muted: rgba(240, 240, 245, 0.35);
+    --text-primary: #2d2640;
+    --text-secondary: #6b5f7d;
+    --text-muted: #a89bbd;
 
-    --accent-indigo: #6366f1;
-    --accent-purple: #a855f7;
-    --accent-pink: #ec4899;
-    --accent-green: #22c55e;
-    --accent-red: #ef4444;
-    --accent-amber: #f59e0b;
+    --accent-lavender: #b8a9d4;
+    --accent-lilac: #c9a5e0;
+    --accent-mint: #a8d8cb;
+    --accent-rose: #e8b4c0;
+    --accent-peach: #f0c8a8;
+    --accent-sky: #a8c8e8;
+    --accent-red-soft: #e09090;
+    --accent-green-soft: #90c8a0;
+    --accent-amber-soft: #d8c090;
 
-    --gradient-primary: linear-gradient(135deg, var(--accent-indigo), var(--accent-purple));
-    --gradient-warm: linear-gradient(135deg, var(--accent-purple), var(--accent-pink));
+    --shadow-sm: 0 1px 3px rgba(45, 38, 64, 0.06);
+    --shadow-md: 0 4px 16px rgba(45, 38, 64, 0.08);
+    --shadow-lg: 0 8px 32px rgba(45, 38, 64, 0.1);
+    --shadow-card: 0 2px 12px rgba(45, 38, 64, 0.06), 0 0 0 1px rgba(228, 220, 237, 0.5);
 
-    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
-    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.3);
-    --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.4);
-    --shadow-glow: 0 0 40px rgba(99, 102, 241, 0.15);
-
-    --radius-sm: 8px;
-    --radius-md: 12px;
-    --radius-lg: 16px;
+    --radius-sm: 10px;
+    --radius-md: 14px;
+    --radius-lg: 18px;
     --radius-xl: 24px;
     --radius-full: 9999px;
 
@@ -72,60 +72,59 @@ body {
 }
 
 /* ============================================
-   BACKGROUND GLOW EFFECTS
+   BACKGROUND DECORATIVE SHAPES
    ============================================ */
 .bg-glow {
     position: fixed;
     border-radius: 50%;
-    filter: blur(120px);
-    opacity: 0.4;
     pointer-events: none;
     z-index: 0;
-    animation: glowDrift 20s ease-in-out infinite alternate;
+    animation: shapeDrift 25s ease-in-out infinite alternate;
 }
 
 .bg-glow-1 {
-    width: 500px;
-    height: 500px;
-    background: var(--accent-indigo);
-    top: -150px;
-    left: -100px;
+    width: 400px;
+    height: 400px;
+    background: var(--accent-lavender);
+    top: -120px;
+    left: -80px;
     opacity: 0.15;
+    filter: blur(80px);
 }
 
 .bg-glow-2 {
-    width: 400px;
-    height: 400px;
-    background: var(--accent-purple);
-    top: 40%;
-    right: -100px;
-    opacity: 0.1;
-    animation-delay: -7s;
+    width: 350px;
+    height: 350px;
+    background: var(--accent-mint);
+    top: 45%;
+    right: -80px;
+    opacity: 0.12;
+    filter: blur(80px);
+    animation-delay: -8s;
 }
 
 .bg-glow-3 {
-    width: 350px;
-    height: 350px;
-    background: var(--accent-pink);
-    bottom: -100px;
-    left: 30%;
-    opacity: 0.08;
-    animation-delay: -14s;
+    width: 300px;
+    height: 300px;
+    background: var(--accent-rose);
+    bottom: -80px;
+    left: 35%;
+    opacity: 0.1;
+    filter: blur(80px);
+    animation-delay: -16s;
 }
 
-@keyframes glowDrift {
+@keyframes shapeDrift {
     0% { transform: translate(0, 0) scale(1); }
-    33% { transform: translate(30px, -20px) scale(1.05); }
-    66% { transform: translate(-20px, 15px) scale(0.95); }
-    100% { transform: translate(10px, -10px) scale(1.02); }
+    33% { transform: translate(20px, -15px) scale(1.04); }
+    66% { transform: translate(-15px, 10px) scale(0.96); }
+    100% { transform: translate(8px, -8px) scale(1.01); }
 }
 
 /* ============================================
    LAYOUT
    ============================================ */
 .container {
-    /* max-width: 640px; */
-    /* margin: 0 auto; */
     padding: 48px 24px 80px;
     position: relative;
     z-index: 1;
@@ -157,10 +156,7 @@ body {
 .logo-text {
     font-size: 1.75rem;
     font-weight: 700;
-    background: var(--gradient-primary);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--accent-lavender);
     letter-spacing: -0.02em;
 }
 
@@ -180,16 +176,14 @@ body {
     border-radius: var(--radius-xl);
     padding: 48px 32px;
     text-align: center;
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    box-shadow: var(--shadow-lg);
+    box-shadow: var(--shadow-card);
     transition: border-color var(--transition-base), box-shadow var(--transition-base);
     animation: fadeInUp 0.6s var(--transition-base);
 }
 
 .recorder-card.recording {
-    border-color: rgba(239, 68, 68, 0.3);
-    box-shadow: var(--shadow-lg), 0 0 60px rgba(239, 68, 68, 0.08);
+    border-color: var(--accent-rose);
+    box-shadow: var(--shadow-lg), 0 0 0 4px rgba(232, 180, 192, 0.15);
 }
 
 /* ============================================
@@ -210,14 +204,14 @@ body {
     width: 100%;
     height: 100%;
     border-radius: 50%;
-    border: 1.5px solid rgba(99, 102, 241, 0.15);
+    border: 1.5px solid rgba(184, 169, 212, 0.25);
     opacity: 0;
     transition: opacity var(--transition-base);
 }
 
 .mic-wrapper.recording .mic-ring {
     opacity: 1;
-    border-color: rgba(239, 68, 68, 0.2);
+    border-color: rgba(232, 180, 192, 0.3);
 }
 
 .mic-wrapper.recording .mic-ring-1 {
@@ -235,7 +229,7 @@ body {
 @keyframes pulseRing {
     0% {
         transform: scale(0.8);
-        opacity: 0.6;
+        opacity: 0.5;
     }
     100% {
         transform: scale(1.8);
@@ -248,7 +242,7 @@ body {
     height: 80px;
     border-radius: 50%;
     border: none;
-    background: var(--gradient-primary);
+    background: var(--accent-lavender);
     color: white;
     cursor: pointer;
     display: flex;
@@ -256,13 +250,14 @@ body {
     justify-content: center;
     position: relative;
     z-index: 2;
-    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
-    box-shadow: 0 4px 20px rgba(99, 102, 241, 0.3);
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast);
+    box-shadow: 0 4px 16px rgba(184, 169, 212, 0.35);
 }
 
 .mic-btn:hover {
-    transform: scale(1.05);
-    box-shadow: 0 6px 28px rgba(99, 102, 241, 0.4);
+    transform: scale(1.06);
+    background: #a798c8;
+    box-shadow: 0 6px 24px rgba(184, 169, 212, 0.45);
 }
 
 .mic-btn:active {
@@ -270,13 +265,14 @@ body {
 }
 
 .mic-btn.recording {
-    background: linear-gradient(135deg, var(--accent-red), #dc2626);
-    box-shadow: 0 4px 20px rgba(239, 68, 68, 0.35);
+    background: var(--accent-rose);
+    box-shadow: 0 4px 16px rgba(232, 180, 192, 0.4);
     animation: micPulse 1.5s ease-in-out infinite;
 }
 
 .mic-btn.recording:hover {
-    box-shadow: 0 6px 28px rgba(239, 68, 68, 0.45);
+    background: #d8a0b0;
+    box-shadow: 0 6px 24px rgba(232, 180, 192, 0.5);
 }
 
 @keyframes micPulse {
@@ -319,21 +315,21 @@ body {
 }
 
 .status-dot.recording {
-    background: var(--accent-red);
+    background: var(--accent-rose);
     animation: dotPulse 1s ease-in-out infinite;
 }
 
 .status-dot.processing {
-    background: var(--accent-amber);
+    background: var(--accent-amber-soft);
     animation: dotPulse 0.6s ease-in-out infinite;
 }
 
 .status-dot.done {
-    background: var(--accent-green);
+    background: var(--accent-green-soft);
 }
 
 .status-dot.error {
-    background: var(--accent-red);
+    background: var(--accent-red-soft);
 }
 
 @keyframes dotPulse {
@@ -393,9 +389,7 @@ body {
     border: 1px solid var(--border-subtle);
     border-radius: var(--radius-xl);
     padding: 28px;
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    box-shadow: var(--shadow-lg);
+    box-shadow: var(--shadow-card);
     animation: fadeInUp 0.4s ease;
 }
 
@@ -415,14 +409,14 @@ body {
 
 .transcript-actions {
     display: flex;
-    gap: 4px;
+    gap: 6px;
 }
 
 .action-btn {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    padding: 6px 12px;
+    padding: 7px 14px;
     border: 1px solid var(--border-subtle);
     border-radius: var(--radius-sm);
     background: var(--bg-elevated);
@@ -437,7 +431,8 @@ body {
 .action-btn:hover {
     background: var(--bg-card-hover);
     color: var(--text-primary);
-    border-color: rgba(255, 255, 255, 0.15);
+    border-color: var(--border-accent);
+    box-shadow: var(--shadow-sm);
 }
 
 .action-btn:active {
@@ -458,7 +453,7 @@ body {
     padding: 16px;
     border: 1px solid var(--border-subtle);
     border-radius: var(--radius-md);
-    background: rgba(0, 0, 0, 0.2);
+    background: var(--bg-base);
     color: var(--text-primary);
     font-family: var(--font-sans);
     font-size: 0.95rem;
@@ -469,8 +464,8 @@ body {
 
 .transcript-text:focus {
     outline: none;
-    border-color: var(--accent-indigo);
-    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+    border-color: var(--accent-lavender);
+    box-shadow: 0 0 0 3px rgba(184, 169, 212, 0.2);
 }
 
 .transcript-text::placeholder {
@@ -506,8 +501,6 @@ body {
     transform: translateX(-50%) translateY(20px);
     background: var(--bg-card);
     border: 1px solid var(--border-subtle);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
     color: var(--text-primary);
     padding: 12px 24px;
     border-radius: var(--radius-full);

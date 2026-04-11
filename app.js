@@ -39,7 +39,7 @@ let animationFrameId = null;
 
 // environment check 
 const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
-const API_BASE = isLocal ? 'http://localhost:5500' : '';
+const API_BASE = isLocal ? 'http://127.0.0.1:5000' : '';
 
 micBtn.addEventListener('click', async () => {
     if (isRecording) {
@@ -290,10 +290,10 @@ function drawWaveform() {
             const x = i * (barWidth + 2);
             const y = (height - barHeight) / 2;
 
-            // Gradient color per bar
-            const hue = 240 + (i / barCount) * 60; // indigo → purple
-            const alpha = 0.5 + (value / 255) * 0.5;
-            ctx.fillStyle = `hsla(${hue}, 70%, 65%, ${alpha})`;
+            // Pastel lavender-lilac palette for bars
+            const hue = 270 + (i / barCount) * 30; // lavender → lilac
+            const alpha = 0.4 + (value / 255) * 0.5;
+            ctx.fillStyle = `hsla(${hue}, 40%, 70%, ${alpha})`;
             ctx.beginPath();
             ctx.roundRect(x, y, barWidth, barHeight, 2);
             ctx.fill();
