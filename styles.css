@@ -125,10 +125,12 @@ body {
    LAYOUT
    ============================================ */
 .container {
+    margin: 0;
     padding: 48px 24px 80px;
     position: relative;
     z-index: 1;
-    width: 50%;
+    width: 100%;
+    max-width: 800px;
 }
 
 /* ============================================

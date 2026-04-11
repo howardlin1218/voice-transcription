@@ -2,17 +2,11 @@ require('dotenv').config();
 const express = require('express');
 const multer = require('multer');
 const Groq = require('groq-sdk');
-const cors = require('cors');
 
 const app = express();
 const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
 const PORT = process.env.PORT || 5000;
 const HOST = process.env.HOST || '0.0.0.0';
-
-// 1. Middleware
-if (HOST === "127.0.0.1") {
-  app.use(cors()); // Essential if frontend/backend are on different ports  app.use(cors()); // Essential if frontend/backend are on different ports
-}
 app.use(express.json());
 
 // Serve frontend static files (index.html, app.js, styles.css, etc.)

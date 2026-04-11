@@ -37,10 +37,6 @@ let animationFrameId = null;
 // Recording Controls
 // ============================================
 
-// environment check 
-const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
-const API_BASE = isLocal ? 'http://127.0.0.1:5000' : '';
-
 micBtn.addEventListener('click', async () => {
     if (isRecording) {
         stopRecording();
@@ -139,7 +135,7 @@ async function handleRecordingComplete(audioBlob) {
         const formData = new FormData();
         formData.append('file', audioBlob, `recording.${ext}`);
 
-        const response = await fetch(`${API_BASE}/api/transcribe`, {
+        const response = await fetch('/api/transcribe', {
             method: 'POST',
             body: formData,
         });
