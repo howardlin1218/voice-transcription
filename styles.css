@@ -1,45 +1,48 @@
 /* ============================================
-   DESIGN TOKENS — PASTEL PALETTE
+   DESIGN TOKENS — MINIMALIST DARK PALETTE
+   (Zero gradients, zero neons, matte surfaces)
    ============================================ */
 :root {
-    --bg-base: #f5f0f8;
-    --bg-elevated: #ffffff;
-    --bg-card: #ffffff;
-    --bg-card-hover: #f0eaf5;
+    /* Surfaces */
+    --bg-base: #0c0d10;
+    --bg-card: #14161b;
+    --bg-card-hover: #191c23;
+    --bg-elevated: #1e222b;
+    --bg-input: #0f1115;
 
-    --border-subtle: #e4dced;
-    --border-accent: #c4b5d4;
+    /* Hairline borders */
+    --border-subtle: #232731;
+    --border-accent: #333a48;
+    --border-focus: #4b5568;
 
-    --text-primary: #2d2640;
-    --text-secondary: #6b5f7d;
-    --text-muted: #a89bbd;
+    /* Typography */
+    --text-primary: #f0f2f5;
+    --text-secondary: #949ca8;
+    --text-muted: #586170;
 
-    --accent-lavender: #b8a9d4;
-    --accent-lilac: #c9a5e0;
-    --accent-mint: #a8d8cb;
-    --accent-rose: #e8b4c0;
-    --accent-peach: #f0c8a8;
-    --accent-sky: #a8c8e8;
-    --accent-red-soft: #e09090;
-    --accent-green-soft: #90c8a0;
-    --accent-amber-soft: #d8c090;
+    /* Solid Matte Status Accents (No neon / no gradient) */
+    --accent-recording: #c53929;
+    --accent-recording-hover: #b03223;
+    --accent-success: #2e7d4f;
+    --accent-amber: #a87922;
 
-    --shadow-sm: 0 1px 3px rgba(45, 38, 64, 0.06);
-    --shadow-md: 0 4px 16px rgba(45, 38, 64, 0.08);
-    --shadow-lg: 0 8px 32px rgba(45, 38, 64, 0.1);
-    --shadow-card: 0 2px 12px rgba(45, 38, 64, 0.06), 0 0 0 1px rgba(228, 220, 237, 0.5);
+    /* Neutral shadows */
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+    --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.45);
+    --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.6);
 
-    --radius-sm: 10px;
-    --radius-md: 14px;
-    --radius-lg: 18px;
-    --radius-xl: 24px;
+    /* Geometry */
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 14px;
     --radius-full: 9999px;
 
-    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 
-    --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
-    --transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
-    --transition-slow: 400ms cubic-bezier(0.4, 0, 0.2, 1);
+    /* Micro-interactions */
+    --transition-fast: 120ms ease;
+    --transition-base: 200ms ease;
 }
 
 /* ============================================
@@ -59,12 +62,9 @@ html {
 
 body {
     font-family: var(--font-sans);
-    background: var(--bg-base);
+    background-color: var(--bg-base);
     color: var(--text-primary);
     min-height: 100vh;
-    overflow-x: hidden;
-    position: relative;
-
     display: flex;
     justify-content: center;
     align-items: center;
@@ -72,65 +72,13 @@ body {
 }
 
 /* ============================================
-   BACKGROUND DECORATIVE SHAPES
-   ============================================ */
-.bg-glow {
-    position: fixed;
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 0;
-    animation: shapeDrift 25s ease-in-out infinite alternate;
-}
-
-.bg-glow-1 {
-    width: 400px;
-    height: 400px;
-    background: var(--accent-lavender);
-    top: -120px;
-    left: -80px;
-    opacity: 0.15;
-    filter: blur(80px);
-}
-
-.bg-glow-2 {
-    width: 350px;
-    height: 350px;
-    background: var(--accent-mint);
-    top: 45%;
-    right: -80px;
-    opacity: 0.12;
-    filter: blur(80px);
-    animation-delay: -8s;
-}
-
-.bg-glow-3 {
-    width: 300px;
-    height: 300px;
-    background: var(--accent-rose);
-    bottom: -80px;
-    left: 35%;
-    opacity: 0.1;
-    filter: blur(80px);
-    animation-delay: -16s;
-}
-
-@keyframes shapeDrift {
-    0% { transform: translate(0, 0) scale(1); }
-    33% { transform: translate(20px, -15px) scale(1.04); }
-    66% { transform: translate(-15px, 10px) scale(0.96); }
-    100% { transform: translate(8px, -8px) scale(1.01); }
-}
-
-/* ============================================
    LAYOUT
    ============================================ */
 .container {
-    margin: 0;
-    padding: 48px 24px 80px;
-    position: relative;
-    z-index: 1;
     width: 100%;
-    max-width: 800px;
+    max-width: 720px;
+    padding: 48px 24px 64px;
+    margin: 0 auto;
 }
 
 /* ============================================
@@ -138,54 +86,51 @@ body {
    ============================================ */
 .header {
     text-align: center;
-    margin-bottom: 48px;
-    animation: fadeInDown 0.6s var(--transition-base);
+    margin-bottom: 40px;
 }
 
 .logo {
     display: inline-flex;
     align-items: center;
     gap: 12px;
-    margin-bottom: 12px;
+    margin-bottom: 8px;
 }
 
 .logo-icon {
-    width: 40px;
-    height: 40px;
+    width: 36px;
+    height: 36px;
     flex-shrink: 0;
 }
 
 .logo-text {
-    font-size: 1.75rem;
-    font-weight: 700;
-    color: var(--accent-lavender);
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
     letter-spacing: -0.02em;
 }
 
 .tagline {
     color: var(--text-secondary);
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     font-weight: 400;
-    letter-spacing: 0.02em;
+    letter-spacing: 0.01em;
 }
 
 /* ============================================
    RECORDER CARD
    ============================================ */
 .recorder-card {
-    background: var(--bg-card);
+    background-color: var(--bg-card);
     border: 1px solid var(--border-subtle);
-    border-radius: var(--radius-xl);
-    padding: 48px 32px;
+    border-radius: var(--radius-lg);
+    padding: 44px 32px;
     text-align: center;
     box-shadow: var(--shadow-card);
-    transition: border-color var(--transition-base), box-shadow var(--transition-base);
-    animation: fadeInUp 0.6s var(--transition-base);
+    transition: border-color var(--transition-base);
 }
 
 .recorder-card.recording {
-    border-color: var(--accent-rose);
-    box-shadow: var(--shadow-lg), 0 0 0 4px rgba(232, 180, 192, 0.15);
+    border-color: var(--border-accent);
 }
 
 /* ============================================
@@ -196,9 +141,9 @@ body {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 120px;
-    height: 120px;
-    margin-bottom: 24px;
+    width: 110px;
+    height: 110px;
+    margin-bottom: 20px;
 }
 
 .mic-ring {
@@ -206,60 +151,60 @@ body {
     width: 100%;
     height: 100%;
     border-radius: 50%;
-    border: 1.5px solid rgba(184, 169, 212, 0.25);
+    border: 1px solid var(--border-subtle);
     opacity: 0;
     transition: opacity var(--transition-base);
 }
 
 .mic-wrapper.recording .mic-ring {
     opacity: 1;
-    border-color: rgba(232, 180, 192, 0.3);
+    border-color: rgba(197, 57, 41, 0.35);
 }
 
 .mic-wrapper.recording .mic-ring-1 {
-    animation: pulseRing 2s ease-out infinite;
+    animation: ringPulse 2s cubic-bezier(0.2, 0.8, 0.2, 1) infinite;
 }
 
 .mic-wrapper.recording .mic-ring-2 {
-    animation: pulseRing 2s ease-out infinite 0.5s;
+    animation: ringPulse 2s cubic-bezier(0.2, 0.8, 0.2, 1) infinite 0.6s;
 }
 
 .mic-wrapper.recording .mic-ring-3 {
-    animation: pulseRing 2s ease-out infinite 1s;
+    animation: ringPulse 2s cubic-bezier(0.2, 0.8, 0.2, 1) infinite 1.2s;
 }
 
-@keyframes pulseRing {
+@keyframes ringPulse {
     0% {
-        transform: scale(0.8);
+        transform: scale(0.85);
         opacity: 0.5;
     }
     100% {
-        transform: scale(1.8);
+        transform: scale(1.6);
         opacity: 0;
     }
 }
 
 .mic-btn {
-    width: 80px;
-    height: 80px;
+    width: 76px;
+    height: 76px;
     border-radius: 50%;
-    border: none;
-    background: var(--accent-lavender);
-    color: white;
+    border: 1px solid var(--border-accent);
+    background-color: var(--bg-elevated);
+    color: var(--text-primary);
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
     z-index: 2;
-    transition: transform var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast);
-    box-shadow: 0 4px 16px rgba(184, 169, 212, 0.35);
+    transition: background-color var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast);
+    box-shadow: var(--shadow-sm);
 }
 
 .mic-btn:hover {
-    transform: scale(1.06);
-    background: #a798c8;
-    box-shadow: 0 6px 24px rgba(184, 169, 212, 0.45);
+    background-color: #242934;
+    border-color: #41495a;
+    transform: scale(1.03);
 }
 
 .mic-btn:active {
@@ -267,25 +212,26 @@ body {
 }
 
 .mic-btn.recording {
-    background: var(--accent-rose);
-    box-shadow: 0 4px 16px rgba(232, 180, 192, 0.4);
-    animation: micPulse 1.5s ease-in-out infinite;
+    background-color: var(--accent-recording);
+    border-color: var(--accent-recording);
+    color: #ffffff;
+    animation: micActivePulse 1.8s ease-in-out infinite;
 }
 
 .mic-btn.recording:hover {
-    background: #d8a0b0;
-    box-shadow: 0 6px 24px rgba(232, 180, 192, 0.5);
+    background-color: var(--accent-recording-hover);
+    border-color: var(--accent-recording-hover);
 }
 
-@keyframes micPulse {
+@keyframes micActivePulse {
     0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.04); }
+    50% { transform: scale(1.03); }
 }
 
 .mic-icon,
 .stop-icon {
-    width: 32px;
-    height: 32px;
+    width: 30px;
+    height: 30px;
     transition: opacity var(--transition-fast);
 }
 
@@ -301,46 +247,46 @@ body {
     align-items: center;
     justify-content: center;
     gap: 8px;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
 }
 
 .status-dot {
-    width: 8px;
-    height: 8px;
+    width: 7px;
+    height: 7px;
     border-radius: 50%;
-    background: var(--text-muted);
-    transition: background var(--transition-base);
+    background-color: var(--text-muted);
+    transition: background-color var(--transition-base);
 }
 
 .status-dot.ready {
-    background: var(--text-muted);
+    background-color: var(--text-muted);
 }
 
 .status-dot.recording {
-    background: var(--accent-rose);
-    animation: dotPulse 1s ease-in-out infinite;
+    background-color: var(--accent-recording);
+    animation: dotBlink 1.2s ease-in-out infinite;
 }
 
 .status-dot.processing {
-    background: var(--accent-amber-soft);
-    animation: dotPulse 0.6s ease-in-out infinite;
+    background-color: var(--accent-amber);
+    animation: dotBlink 0.8s ease-in-out infinite;
 }
 
 .status-dot.done {
-    background: var(--accent-green-soft);
+    background-color: var(--accent-success);
 }
 
 .status-dot.error {
-    background: var(--accent-red-soft);
+    background-color: var(--accent-recording);
 }
 
-@keyframes dotPulse {
+@keyframes dotBlink {
     0%, 100% { opacity: 1; }
-    50% { opacity: 0.3; }
+    50% { opacity: 0.35; }
 }
 
 .status-text {
-    font-size: 0.875rem;
+    font-size: 0.85rem;
     color: var(--text-secondary);
     font-weight: 400;
 }
@@ -349,14 +295,14 @@ body {
    TIMER
    ============================================ */
 .timer {
-    font-size: 2rem;
-    font-weight: 600;
+    font-size: 1.75rem;
+    font-weight: 500;
+    font-family: var(--font-mono);
     color: var(--text-primary);
-    letter-spacing: 0.05em;
     font-variant-numeric: tabular-nums;
     margin-top: 8px;
     opacity: 0;
-    animation: fadeIn 0.3s ease forwards;
+    animation: fadeIn 0.2s ease forwards;
 }
 
 .timer:not(.hidden) {
@@ -367,11 +313,11 @@ body {
    WAVEFORM
    ============================================ */
 .waveform {
-    margin-top: 20px;
+    margin-top: 18px;
     display: flex;
     justify-content: center;
     opacity: 0;
-    animation: fadeIn 0.3s ease forwards;
+    animation: fadeIn 0.2s ease forwards;
 }
 
 .waveform:not(.hidden) {
@@ -380,30 +326,32 @@ body {
 
 #waveform-canvas {
     border-radius: var(--radius-sm);
+    background-color: var(--bg-input);
+    border: 1px solid var(--border-subtle);
 }
 
 /* ============================================
    TRANSCRIPT CARD
    ============================================ */
 .transcript-card {
-    margin-top: 24px;
-    background: var(--bg-card);
+    margin-top: 20px;
+    background-color: var(--bg-card);
     border: 1px solid var(--border-subtle);
-    border-radius: var(--radius-xl);
-    padding: 28px;
+    border-radius: var(--radius-lg);
+    padding: 24px;
     box-shadow: var(--shadow-card);
-    animation: fadeInUp 0.4s ease;
+    animation: fadeIn 0.3s ease;
 }
 
 .transcript-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 16px;
+    margin-bottom: 14px;
 }
 
 .transcript-title {
-    font-size: 1rem;
+    font-size: 0.95rem;
     font-weight: 600;
     color: var(--text-primary);
     letter-spacing: -0.01em;
@@ -411,30 +359,29 @@ body {
 
 .transcript-actions {
     display: flex;
-    gap: 6px;
+    gap: 8px;
 }
 
 .action-btn {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    padding: 7px 14px;
+    padding: 6px 12px;
     border: 1px solid var(--border-subtle);
     border-radius: var(--radius-sm);
-    background: var(--bg-elevated);
+    background-color: var(--bg-elevated);
     color: var(--text-secondary);
     font-family: var(--font-sans);
     font-size: 0.8rem;
     font-weight: 500;
     cursor: pointer;
-    transition: all var(--transition-fast);
+    transition: background-color var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast), transform var(--transition-fast);
 }
 
 .action-btn:hover {
-    background: var(--bg-card-hover);
+    background-color: var(--bg-card-hover);
     color: var(--text-primary);
     border-color: var(--border-accent);
-    box-shadow: var(--shadow-sm);
 }
 
 .action-btn:active {
@@ -451,23 +398,23 @@ body {
 .transcript-text {
     width: 100%;
     min-height: 160px;
-    max-height: 400px;
-    padding: 16px;
+    max-height: 380px;
+    padding: 14px;
     border: 1px solid var(--border-subtle);
     border-radius: var(--radius-md);
-    background: var(--bg-base);
+    background-color: var(--bg-input);
     color: var(--text-primary);
     font-family: var(--font-sans);
-    font-size: 0.95rem;
-    line-height: 1.7;
+    font-size: 0.925rem;
+    line-height: 1.65;
     resize: vertical;
     transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
 }
 
 .transcript-text:focus {
     outline: none;
-    border-color: var(--accent-lavender);
-    box-shadow: 0 0 0 3px rgba(184, 169, 212, 0.2);
+    border-color: var(--border-focus);
+    box-shadow: 0 0 0 1px var(--border-focus);
 }
 
 .transcript-text::placeholder {
@@ -498,15 +445,15 @@ body {
    ============================================ */
 .toast {
     position: fixed;
-    bottom: 32px;
+    bottom: 28px;
     left: 50%;
-    transform: translateX(-50%) translateY(20px);
-    background: var(--bg-card);
-    border: 1px solid var(--border-subtle);
+    transform: translateX(-50%) translateY(16px);
+    background-color: var(--bg-elevated);
+    border: 1px solid var(--border-accent);
     color: var(--text-primary);
-    padding: 12px 24px;
+    padding: 10px 20px;
     border-radius: var(--radius-full);
-    font-size: 0.85rem;
+    font-size: 0.825rem;
     font-weight: 500;
     box-shadow: var(--shadow-lg);
     opacity: 0;
@@ -529,58 +476,36 @@ body {
     to { opacity: 1; }
 }
 
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(16px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes fadeInDown {
-    from {
-        opacity: 0;
-        transform: translateY(-16px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
 /* ============================================
    RESPONSIVE
    ============================================ */
 @media (max-width: 480px) {
     .container {
-        padding: 32px 16px 64px;
+        padding: 32px 16px 48px;
     }
 
     .recorder-card {
-        padding: 36px 20px;
+        padding: 32px 16px;
     }
 
     .transcript-card {
-        padding: 20px;
+        padding: 18px;
     }
 
     .transcript-header {
         flex-direction: column;
         align-items: flex-start;
-        gap: 12px;
+        gap: 10px;
     }
 
     .mic-btn {
-        width: 72px;
-        height: 72px;
+        width: 68px;
+        height: 68px;
     }
 
     .mic-icon,
     .stop-icon {
-        width: 28px;
-        height: 28px;
+        width: 26px;
+        height: 26px;
     }
 }

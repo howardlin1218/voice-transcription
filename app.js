@@ -177,7 +177,9 @@ function updateCounts() {
     charCount.textContent = `${chars} character${chars !== 1 ? 's' : ''}`;
 }
 
-transcriptText.addEventListener('input', updateCounts);
+['input', 'change', 'keyup', 'paste'].forEach((evt) => {
+    transcriptText.addEventListener(evt, () => setTimeout(updateCounts, 0));
+});
 
 // ============================================
 // Action Buttons
@@ -286,10 +288,9 @@ function drawWaveform() {
             const x = i * (barWidth + 2);
             const y = (height - barHeight) / 2;
 
-            // Pastel lavender-lilac palette for bars
-            const hue = 270 + (i / barCount) * 30; // lavender → lilac
-            const alpha = 0.4 + (value / 255) * 0.5;
-            ctx.fillStyle = `hsla(${hue}, 40%, 70%, ${alpha})`;
+            // Minimalist monochromatic bars (no gradient)
+            const alpha = 0.35 + (value / 255) * 0.65;
+            ctx.fillStyle = `rgba(240, 242, 245, ${alpha})`;
             ctx.beginPath();
             ctx.roundRect(x, y, barWidth, barHeight, 2);
             ctx.fill();
